@@ -1,9 +1,5 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sat May 17 13:06:59 2025
 
-@author: USER
-"""
+
 
 import streamlit as st
 import pandas as pd
@@ -14,8 +10,14 @@ import docx2txt
 from sentence_transformers import SentenceTransformer
 import numpy as np
 
-# Load spaCy model
-nlp = spacy.load("en_core_web_lg")
+import spacy
+try:
+    nlp = spacy.load("en_core_web_lg")
+except:
+    import os
+    os.system("python -m spacy download en_core_web_lg")
+    nlp = spacy.load("en_core_web_lg")
+
 
 # Load models and vectorizers
 category_model = joblib.load("resume_category_classifier.pkl")
